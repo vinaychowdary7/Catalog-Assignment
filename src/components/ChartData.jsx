@@ -12,6 +12,7 @@ import {
   PointElement,
   LineElement,
   BarElement, // Import BarElement
+  BarController,
   Tooltip,
   Filler,
 } from "chart.js";
@@ -24,6 +25,7 @@ ChartJS.register(
   PointElement,
   LineElement,
   BarElement, // Register BarElement
+  BarController,
   Tooltip,
   Filler
 );
