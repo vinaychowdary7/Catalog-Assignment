@@ -160,7 +160,7 @@ const ChartData = ({onStockPointsUpdate}) => {
         : 12;
 
     for (let i = 0; i < length; i++) {
-      let size = range < 15 ? range : 15;
+      let size = range < 10 ? range : 10;
       for (let j = 0; j < size; j++) {
         const price = Math.floor(Math.random() * 10000) + 1000;
         const volume = Math.floor(Math.random() * 1000) + 1;
