@@ -13,7 +13,7 @@ const crosshairPlugin = {
     const { event } = args;
     chart.cursor = { x: event.x, y: event.y };
   },
-  beforeDraw: (chart) => {
+  afterDatasetsDraw: (chart) => { // Change to `afterDatasetsDraw` to draw on top
     const { ctx, chartArea, cursor } = chart;
 
     if (cursor && cursor.x >= chartArea.left && cursor.x <= chartArea.right && cursor.y >= chartArea.top && cursor.y <= chartArea.bottom) {
@@ -61,7 +61,7 @@ const crosshairPlugin = {
         });
 
         const hoveredValue = dataset.data[closestIndex];
-
+        
         const labelWidth = 50;
         const labelHeight = 20;
         const xPosLabel = chartArea.right - 50;
@@ -90,7 +90,7 @@ const crosshairPlugin = {
   },
 };
 
-const ChartData = () => {
+const ChartData = ({onStockPointsUpdate}) => {
   const [activeRange, setActiveRange] = useState("1w");
   const [chartData, setChartData] = useState(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -160,7 +160,7 @@ const ChartData = () => {
         : 12;
 
     for (let i = 0; i < length; i++) {
-      let size = range < 10 ? range : 10;
+      let size = range < 15 ? range : 15;
       for (let j = 0; j < size; j++) {
         const price = Math.floor(Math.random() * 10000) + 1000;
         const volume = Math.floor(Math.random() * 1000) + 1;
@@ -168,6 +168,12 @@ const ChartData = () => {
         volumes.push(volume);
         labels.push(`Label ${i * 10 + j + 1}`);
       }
+    }
+
+    if (stockPrices.length >= 2) {
+      const lastPoint = stockPrices[stockPrices.length - 1];
+      const secondLastPoint = stockPrices[stockPrices.length - 2];
+      onStockPointsUpdate(lastPoint, secondLastPoint);
     }
 
     return { stockPrices, volumes, labels };
