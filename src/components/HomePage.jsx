@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import InPageNavigation from './InPageNavigation';
-import ChartTab from './Chart';
-import StockChart from './Settings'
 import ChartData from './ChartData';
 
 const HomePage = () => {
@@ -17,15 +15,15 @@ const HomePage = () => {
   const renderTabContent = () => {
     switch (selectedTab) {
       case 0:
-        return <ChartData/>;
+        return <div>Summary</div>;
       case 1:
-        return <ChartTab/>;
+        return <ChartData/>;
       case 2:
-        return <StockChart />;
+        return <div>Statistics</div>;
       case 3:
         return <div>Analysis Content</div>;
       case 4:
-        return <StockChart/>;
+        return <div>Settings</div>;
       default:
         return <div>Select a Tab</div>;
     }
